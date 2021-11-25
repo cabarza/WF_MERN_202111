@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Formularios</title>
+    </head>
+    <body>
+        <form>
+            <label>
+                Nombre: <input type="text" name="nombre" maxlength="10" minlength="5" required >
+            </label>
+            <br>
+            <label>Email:</label>
+            <input type="email" name="email" value="mail@test.cl" disabled>
+            <br>
+            <label>Color:</label>
+            <input type="color" name="colorcito" id="color">
+            <br>
+            <label>Edad:</label>
+            <input type="number" name="edad" min="10" max="20">
+            <br>
+            <label>Clave:</label>
+            <input type="password" name="clave" required>
+            <br>
+            <label>Región:</label>
+            <select name="region">
+                <option value="">Seleccione</option>
+                <option value="XIII">Metropolitana</option>
+                <option value="V">Valparaíso</option>
+                <option value="XV">Árica</option>
+            </select>
+            <br>
+            <label>Genero:</label>
+            <input type="radio" name="genero" value="F" checked>Femenino
+            <input type="radio" name="genero" value="M">Masculino 
+            <input type="radio" name="genero" value="O">Otro
+            <br>
+            <label>Gustos</label>
+            <input type="checkbox" name="gusto" value="musica" checked>Música
+            <input type="checkbox" name="gusto" value="tecnologia">Tecnología
+            <input type="checkbox" name="gusto" value="futbol">Fútbol
+            <br>
+            <label>Observaciones</label>
+            <textarea name="texto" cols="20" rows="10"></textarea>
+            <br>
+            <input type="hidden" name="oculto" value="Este texto no lo verán">
+
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
