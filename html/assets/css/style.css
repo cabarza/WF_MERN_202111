@@ -1,0 +1,71 @@
+body {
+    background-color: gray;
+    color: white;
+    background-image: url('../img/coding_dojo.jpeg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-position: center;
+}
+
+.label-width {
+    width: 300px;
+    display: inline-block;
+    height: 100px;
+}
+
+label {
+    font-weight: bolder;
+    width: 200px;
+    display: inline-block;
+}
+
+
+#btn-submit {
+    float: right;
+    width: 300px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+#id1 {
+    border: 1px solid red;
+}
+
+#id2 {
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid green;
+}
+
+#div1 {
+    height: 100px;
+    background-color: green;
+    margin: 10px;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#div2 {
+    height: 100px;
+    background-color: blue;
+}
+
+#div3 {
+    height: 100px;
+    background-color: red;
+}
+
+.hijo1 {
+    height: 100%;
+    background-color: hotpink;
+    height: 70%;
+    background-color: hotpink;
+    display: inline-block;
+    width: 30%;
+}
+}
+

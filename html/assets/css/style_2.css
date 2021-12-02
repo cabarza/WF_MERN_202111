@@ -1,0 +1,27 @@
+body {
+    height: 2000px;
+}
+
+#div1 {
+    height: 100px;
+    background-color: green;
+    position: fixed;
+    top: 500px;
+    width: 50%;
+}
+
+#div2 {
+    height: 100px;
+    background-color: blue;
+    position: absolute;
+    bottom: 34px;
+    right: 20px;
+    width: 80%;
+}
+
+#div3 {
+    height: 100px;
+    background-color: red;
+    position: relative;
+    top: 100px;
+}
