@@ -1,0 +1,25 @@
+div {
+    border: 1px solid black; 
+    min-height: 100px;
+}
+
+.link_google {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+
+.link_google:hover {
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    text-decoration: overline;
+}
+
+.imagen-fondo {
+    background-image: url('../img/coding_dojo.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
