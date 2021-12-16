@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('button').click(() => {
+                $.get('https://pokeapi.co/api/v2/pokemon/'+$('#filtro').val()).then(resp => {
+                    console.log(resp);
+                    $('#contenido').append(`<label>Nombre:</label><span>${resp.name}</span>`);
+                    $('#contenido').append(`<img src="${resp.sprites.front_default}">`);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <img src="./assets/img/coding_dojo.jpeg" />
+    <img src="./assets/img/coding_dojo.jpeg" />
+    <img src="./assets/img/coding_dojo.jpeg" />
+    <img src="./assets/img/coding_dojo.jpeg" />
+    <img src="./assets/img/coding_dojo.jpeg" />
+
+    <label>Filtro</label>
+    <input type="text" id="filtro">
+    <button>Buscar</button>
+
+    <div id="contenido"></div>
+</body>

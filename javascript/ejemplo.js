@@ -7,7 +7,7 @@ function sumar(x) {
     return suma;
 }
 
-sumar(255);
+sumar(5);
 
 
 var msg = 'codingdojo';

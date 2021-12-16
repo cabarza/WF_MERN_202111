@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style_5.css">
+</head>
+    <body>
+        <form>
+            <label>Nombre:</label>
+            <input type="text" id="nombre" required min="3" onblur="alert($('#nombre').val())">
+            <label>Edad</label>
+            <input type="number" id="edad" min="10" max="100" onfocus="alert('Foco en Edad')">
+    
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="contenido"></div> 
+
+        <button onclick="toggle()">Mostrar/Ocultar</button>
+
+        <button onclick="formToggle()">Mostrar/Ocultar Form</button>
+
+        <button onclick="agregarClase()" id="btn_class">Agregar Clase</button>
+
+        <button onclick="cambiarAtributo()">Cambiar colores</button>
+
+       <button onclick="$('#myDiv').children('h3').css('background-color', 'green');">Cambiar BGC</button> 
+
+
+
+        <div id="div1" style="width:80px;height:80px;display:none;background-color:red;position: relative;"></div><br>
+        <div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+        <div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div>
+
+
+        <div id='myDiv'>
+            <p>Here is a paragraph.  It is a beautiful paragraph.</p>
+            <h3>Michael Choi</h3>
+            <h3>John Supsupin</h3>
+            <h3>Trey Villafane</h3>
+        </div>
+
+        <script>
+            let contador = 0;
+            $().ready(() => {
+                $('body').on('keydown', e => console.log(e.key, e.keyCode));
+
+                $('#contenido').html('<h1>Hola a Todos</h1>');
+                console.log($('body'));
+
+                $('form').submit((e) => {
+                    console.log($('#nombre').val());
+                    $('#nombre').val('Otro valor');
+                    alert($('#nombre').val())
+                    
+                    console.log($('form').serialize());
+                    e.preventDefault();
+                })
+
+                $('#contenido').on('dblclick', agregarContenido);
+
+                $('#nombre').on('keydown', (e) => {
+                    if(e.keyCode == 65) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                $('h3, p').click(function(){
+                    $(this).siblings().css('background-color', 'red');
+                    $(this).css('background-color', 'yellow');
+                })
+
+            });
+
+            function toggle() {
+                $('div').fadeToggle(2000);
+                $('#div1').animate({left: '200px', top: '500px'}, 3000);
+            }
+
+            function formToggle() {
+                $('form').toggle();
+            }
+
+            function agregarClase() {
+                const btn = $('#btn_class');
+                if(btn.hasClass('link_google')){
+                    btn.removeClass('link_google');
+                } else {
+                    btn.addClass('link_google');
+                }
+            }
+
+            function cambiarAtributo() {
+                $('#contenido').css('background-color', 'red');
+                console.log($('#contenido').css('background-color'));
+                setTimeout(() => {
+                    $('#contenido').css('background-color', 'black');
+                    $('#contenido').css('color', 'white');
+                }, 1000);
+            }
+
+            function agregarContenido() {
+                $('#contenido').append(`<h2> ${++contador}.- Nuevo Contenido</h2>`);
+            }
+
+        </script>
+    </body>
+
+</html>
