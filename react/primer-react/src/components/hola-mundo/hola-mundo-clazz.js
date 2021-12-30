@@ -16,6 +16,10 @@ class HolaMundo2 extends Component {
         })
     }
 
+    aumentarContador(e) {
+        this.props.setContadorPadre(this.props.contadorPadre + 1);
+    }
+
     render() {
         const {apellido} = this.props;
         return <>
@@ -24,6 +28,7 @@ class HolaMundo2 extends Component {
             {
                 this.props.children
             }
+            <button onClick={e => this.aumentarContador(e)}>Aumentar contador padre</button>
         </>
     }
 }
