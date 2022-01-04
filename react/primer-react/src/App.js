@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Container } from 'reactstrap';
-import Formulario from './components/form/form';
+import Listado from './components/form/listado';
 
 function App() {
 
   return (
     <Container>
-      <Formulario/>
+      <Listado/>
     </Container>    
   );
 }
