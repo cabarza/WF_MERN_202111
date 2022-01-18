@@ -1,35 +1,35 @@
-
-const books= [];
-
+const Book = require('../models/book.model');
 
 module.exports.listar = (req, res) => {
-    res.json( { data: books, message: 'Listado de libros', error: false});
+    Book.find({})
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}))
 }
 
 module.exports.obtener = (req, res) => {
-    const book = books.find(b => b.id == req.params.id);
-    if(book) {
-        res.json({ data: book, message: 'Libro encontrado', error: false});
-    } else {
-        res.json({ data: null, message: 'Libro no encontrado', error: true});
-    }
+    Book.findById(req.params.id)
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}))
 }
 
 module.exports.crear = (req, res) => {
     const book = req.body;
-    book.id = books.length > 0?books[books.length-1].id+1:1;
-    books.push(book);
-    res.json({ data: book, message: 'Libro creado correctamente', error: false});
+    Book.create(book)
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}))
 }
 
 module.exports.actualizar = (req, res) => {
+    console.log(req.body, req.params.id);
     const book = req.body;
-    books.splice(books.findIndex(b=> b.id == req.params.id), 1, book);
-    res.json({ data: book, message: 'Libro actualizado correctamente', error: false});
+    Book.findByIdAndUpdate(req.params.id, book)
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}))
 }
 
 module.exports.eliminar = (req, res) => {
-    books.splice(books.findIndex(b=> b.id == req.params.id), 1);
-    res.json({ data: null, message: 'Libro actualizado correctamente', error: false});
+    Book.findByIdAndDelete(req.params.id)
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}));
 }
 
