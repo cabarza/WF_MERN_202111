@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {Table} from 'reactstrap';
-import {AiOutlineDelete, AiOutlineEdit} from 'react-icons/ai';
+import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
 
 
 const BookList = (props) => {
@@ -18,6 +18,8 @@ const BookList = (props) => {
                     <th>Autor</th>
                     <th>Descripción</th>
                     <th>N° de Páginas</th>
+                    <th>Check</th>
+                    <th>Portada</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +28,17 @@ const BookList = (props) => {
                         <td>
                             <AiOutlineDelete style={{color:'red', width:'30px', height: '30px', cursor:'pointer'}} onClick={e => props.eliminar(l._id)}></AiOutlineDelete>&nbsp;
                             <Link to={`/books/edit/${l._id}`}><AiOutlineEdit style={{color:'orange', width:'30px', height: '30px', cursor:'pointer'}}></AiOutlineEdit></Link>
+                            <Link to={`/books/view/${l._id}`}><AiOutlineEye style={{color:'green', width:'30px', height: '30px', cursor:'pointer'}}></AiOutlineEye></Link>
                         </td>
                         <td>{l._id}</td>
                         <td>{l.titulo}</td>
                         <td>{l.autor}</td>
                         <td>{l.descripcion}</td>
                         <td>{l.paginas}</td>
+                        <td>{l.check?'SI':'NO'}</td>
+                        <td>
+                            <img style={{width: '50px', height:'50px'}} src={l.portada} alt="Portada"/>
+                        </td>
                     </tr>
                 ))}
             </tbody>

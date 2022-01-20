@@ -32,3 +32,17 @@ module.exports.eliminar = (req, res) => {
     .catch(error => res.json( { data: null, message: error, error: true}));
 }
 
+module.exports.cambiaCheck = (req, res) => {
+    Book.findById(req.params.id)
+    .then(book => {
+        if(book) {
+            book.check = !book.check;
+            Book.findByIdAndUpdate(req.params.id, book)
+            .then(data => res.json( { data: book, message: null, error: false}))
+            .catch(error => res.json( { data: null, message: error, error: true}));
+        } else {
+            res.json( { data: null, message: 'El libro no existe', error: true})
+        }
+    }).catch(error => res.json( { data: null, message: error, error: true}));
+}
+

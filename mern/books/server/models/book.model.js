@@ -16,7 +16,11 @@ const BookSchema = new mongoose.Schema({
         required: [true, 'Debe ingresar el número de páginas del libro'],
         min: [10, 'El libro no puede tener menos de 10 páginas'],
         max: [1000, 'El libro no puede tener mas de 1000 páginas']
-    }
+    },
+    portada: {
+        type: String
+    },
+    check: Boolean
 }, {timestamps: true});
 
 const Book = mongoose.model("Book", BookSchema);

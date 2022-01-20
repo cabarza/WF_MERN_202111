@@ -1,4 +1,4 @@
-const { listar, obtener, crear, actualizar, eliminar} = require('../controllers/book-controller');
+const { listar, obtener, crear, actualizar, eliminar, cambiaCheck} = require('../controllers/book-controller');
 
 module.exports = (app) => {
     
@@ -7,4 +7,5 @@ module.exports = (app) => {
     app.post('/api/books', crear);
     app.put('/api/books/:id', actualizar);
     app.delete('/api/books/:id', eliminar);
+    app.patch('/api/books/:id', cambiaCheck);
 }

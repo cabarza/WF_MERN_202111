@@ -8,7 +8,9 @@ const inputsInicial = {
     titulo:'',
     autor: '', 
     descripcion: '',
-    paginas:0
+    paginas:0,
+    portada: '',
+    check: false
 }
 
 const BookForm = (props) => {
@@ -20,6 +22,13 @@ const BookForm = (props) => {
         setInputs({
             ...inputs,
             [name]: value
+        })
+    }
+
+    const actualizaFormularioCheckbox = ({target: {name, checked}}) => {
+        setInputs({
+            ...inputs,
+            [name]: checked
         })
     }
 
@@ -52,7 +61,7 @@ const BookForm = (props) => {
         <Form onSubmit={guardar}>
             <FormGroup>
                 <Label>Título</Label>
-                <Input name="titulo" value={inputs.titulo} onChange={actualizaFormulario} required minLength={2}/>
+                <Input name="titulo" value={inputs.titulo} onChange={actualizaFormulario} required minLength={2} maxLength={200}/>
             </FormGroup>
             <FormGroup>
                 <Label>Autor</Label>
@@ -64,7 +73,17 @@ const BookForm = (props) => {
             </FormGroup>
             <FormGroup>
                 <Label>N° de Páginas</Label>
-                <Input name="paginas" value={inputs.paginas} onChange={actualizaFormulario} type="number" min={10}/>
+                <Input name="paginas" value={inputs.paginas} onChange={actualizaFormulario} type="number" min={10} max={100}/>
+            </FormGroup>
+            <FormGroup>
+                <Label>Portada</Label>
+                <Input type="text" name="portada" value={inputs.portada} onChange={actualizaFormulario}/>
+            </FormGroup>
+            <FormGroup check>
+                <Label check>
+                    <Input type="checkbox" name="check" checked={inputs.check} onChange={actualizaFormularioCheckbox}/>{' '}
+                    Check me out
+                </Label>
             </FormGroup>
             <Row>
                 <Col xs={3}>
