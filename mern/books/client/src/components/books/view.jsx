@@ -22,7 +22,7 @@ const BookView = (props) => {
 
     const actualizarCheck = (e) => {
         e.preventDefault();
-        axios.patch('http://localhost:8000/api/books/' + id)
+        axios.patch('/api/books/' + id)
         .then(resp => {
             if(!resp.data.error) {
                 props.setActualizar(!props.actualizar);
@@ -35,7 +35,7 @@ const BookView = (props) => {
 
     useEffect(() => {
         if(id) {
-            axios.get('http://localhost:8000/api/books/'+id)
+            axios.get('/api/books/'+id)
                 .then(resp => {
                     if(!resp.data.error) {
                         setData(resp.data.data);

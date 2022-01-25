@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {Table} from 'reactstrap';
-import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
+import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye, AiOutlineRead} from 'react-icons/ai';
 
 
 const BookList = (props) => {
@@ -28,7 +28,8 @@ const BookList = (props) => {
                         <td>
                             <AiOutlineDelete style={{color:'red', width:'30px', height: '30px', cursor:'pointer'}} onClick={e => props.eliminar(l._id)}></AiOutlineDelete>&nbsp;
                             <Link to={`/books/edit/${l._id}`}><AiOutlineEdit style={{color:'orange', width:'30px', height: '30px', cursor:'pointer'}}></AiOutlineEdit></Link>
-                            <Link to={`/books/view/${l._id}`}><AiOutlineEye style={{color:'green', width:'30px', height: '30px', cursor:'pointer'}}></AiOutlineEye></Link>
+                            <Link to={`/books/view/${l._id}`}><AiOutlineEye style={{color:'green', width:'30px', height: '30px', cursor:'pointer'}}></AiOutlineEye></Link>&nbsp;
+                            <AiOutlineRead style={{color:'blue', width:'30px', height: '30px', cursor:'pointer', display: l.reserved?'none': 'inline-block'}} onClick={e => props.reservar(l)}></AiOutlineRead>
                         </td>
                         <td>{l._id}</td>
                         <td>{l.titulo}</td>
