@@ -1,9 +1,11 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const cors = require('cors');
 const port = 8000;
 
-app.use(cors({credentials: false, origin: 'http://localhost:3000/'}));
+app.use(cookieParser());
+app.use(cors({credentials: true, origin: 'http://localhost:3000/'}));
 app.use( express.json() );
 app.use( express.urlencoded({ extended: true }) );
 
@@ -13,7 +15,8 @@ app.get('/api', (req, res) => {
     res.json({mensaje: 'Hola a Tod@s, como estan??!!!'});
 });
 
-require('./routes/book-routes')(app);
+require('./routes/user.routes')(app);
+require('./routes/book.routes')(app);
 
 const server = app.listen(port, () => console.log('El servidor esta escuchando en el puerto ' + port));
 
