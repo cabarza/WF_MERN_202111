@@ -6,7 +6,11 @@ const BookSchema = new mongoose.Schema({
         required: [true, 'El título es requerido'],
         minlength: [2, 'El largo del título debe ser de almenos 2 caracteres']
     },
-    autor: String,
+    autorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, 'El autor es requerido']
+    },
     descripcion: {
         type: String,
         required: [true, 'Debe ingresar la descripción del libro']
@@ -22,6 +26,15 @@ const BookSchema = new mongoose.Schema({
     },
     check: Boolean
 }, {timestamps: true});
+
+BookSchema.virtual('user', {
+    ref: 'User',
+    localField: 'autorId',
+    foreignField: '_id'
+});
+
+BookSchema.set('toObject', { virtuals: true });
+BookSchema.set('toJSON', { virtuals: true });
 
 const Book = mongoose.model("Book", BookSchema);
 
