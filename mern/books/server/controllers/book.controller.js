@@ -2,8 +2,16 @@ const Book = require('../models/book.model');
 const jwt = require('jsonwebtoken');
 const {clave} = require('../config/jwt.config');
 
-module.exports.listar = (req, res) => {
-    Book.find({}).populate('user', '-password')
+module.exports.listarLibrosAutor = (req, res) => {
+    const payload = jwt.decode(req.cookies.usertoken, clave);
+    Book.find({ autorId: payload._id }).populate('user', '-password')
+    .then(data => res.json( { data: data, message: null, error: false}))
+    .catch(error => res.json( { data: null, message: error, error: true}))
+}
+
+module.exports.listarLibrosOtrosAutores = (req, res) => {
+    const payload = jwt.decode(req.cookies.usertoken, clave);
+    Book.find({autorId:{$ne: payload._id}}).populate('user', '-password').sort({'createdAt': 1})
     .then(data => res.json( { data: data, message: null, error: false}))
     .catch(error => res.json( { data: null, message: error, error: true}))
 }

@@ -9,6 +9,7 @@ import SocketContext from "../../context/socket-context";
 
 const BookAdmin = (props) => {
     const [libros, setLibros] = useState([]);
+    const [otrosLibros, setOtrosLibros] = useState([]);
     const [act, setAct] = useState(false);
     const socket = useContext(SocketContext);
 
@@ -72,6 +73,37 @@ const BookAdmin = (props) => {
         ls.splice(indice, 1, book);
         setLibros(ls);
     }
+
+    const eliminarOtro = (id) => {
+        Swal.fire({
+            title: 'Eliminar Libro',
+            text: '¿Está seguro de eliminar el libro seleccionado?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Si, eliminalo!!!'
+        }).then(resp => {
+            if(resp.isConfirmed) {
+                axios.delete('/api/books/' + id)
+                .then(resp => {
+                    if(!resp.data.error){
+                        const lista = otrosLibros.filter(l => l._id != id);
+                        setOtrosLibros(lista);
+                    } else {
+                        Swal.fire('Error!!!', resp.data.message, 'error');
+                    }
+                }).catch(error => Swal.fire('Error!!!', 'Error, por favor inténtelo mas tarde', 'error'));
+            }
+        });
+    }
+
+    const reservarOtro = (book) => {
+        socket.emit('book_reservation', book);
+        book.reserved = true;
+        const indice = otrosLibros.findIndex(l => l._id == book._id);
+        const ls = [...otrosLibros];
+        ls.splice(indice, 1, book);
+        setOtrosLibros(ls);
+    }
     
     useEffect(()=>{
         props.setTitulo('Librería');
@@ -79,6 +111,15 @@ const BookAdmin = (props) => {
             .then(resp => {
                 if(!resp.data.error) {
                     setLibros(resp.data.data);
+                }else {
+                    Swal.fire('Error!!!', resp.data.message, 'error');
+                }
+            }).catch(error => Swal.fire('Error!!!', 'Error, por favor inténtelo mas tarde', 'error'));
+
+        axios.get('/api/books/otros')
+            .then(resp => {
+                if(!resp.data.error) {
+                    setOtrosLibros(resp.data.data);
                 }else {
                     Swal.fire('Error!!!', resp.data.message, 'error');
                 }
@@ -96,7 +137,10 @@ const BookAdmin = (props) => {
 
     return <>
         <Routes>
-            <Route path="/" element={<BookList libros={libros} eliminar={eliminar} reservar={reservar}/>} />
+            <Route path="/" element={<>
+                <BookList libros={libros} eliminar={eliminar} reservar={reservar}/>
+                <BookList libros={otrosLibros} eliminar={eliminarOtro} reservar={reservarOtro}/>
+            </>} />
             <Route path="/new" element={<BookForm creacion={true} guardar={crear}/>} />
             <Route path="/edit/:id" element={<BookForm edicion={true} guardar={actualizar} libros={libros}/>} />
             <Route path="/view/:id" element={<BookView visualizacion={true} actualizar={act} setActualizar={setAct} />} />
