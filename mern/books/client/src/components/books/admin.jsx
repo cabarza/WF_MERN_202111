@@ -11,7 +11,7 @@ const BookAdmin = (props) => {
     const [libros, setLibros] = useState([]);
     const [otrosLibros, setOtrosLibros] = useState([]);
     const [act, setAct] = useState(false);
-    const socket = useContext(SocketContext);
+    const {socket} = useContext(SocketContext);
 
 
     const crear = (data, id, successCallback, errorCalback) =>{

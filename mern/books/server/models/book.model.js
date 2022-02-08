@@ -21,6 +21,7 @@ const BookSchema = new mongoose.Schema({
         min: [10, 'El libro no puede tener menos de 10 páginas'],
         max: [1000, 'El libro no puede tener mas de 1000 páginas']
     },
+    estado: String,
     portada: {
         type: String
     },

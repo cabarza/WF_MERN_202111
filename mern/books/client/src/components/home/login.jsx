@@ -1,9 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import Swal from "sweetalert2";
+import SocketContext from "../../context/socket-context";
 
 const Login = (props) => {
+
+    const {setUsuario} = useContext(SocketContext);
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -17,6 +20,8 @@ const Login = (props) => {
                 Swal.fire('Error', 'El usuario o clave no son válidos', 'error');
             } else {
                 props.setLogin(true);
+                setUsuario(resp.data.data);
+                sessionStorage.setItem('USUARIO', JSON.stringify(resp.data.data));
             }
         })
     }

@@ -26,6 +26,7 @@ module.exports.crear = (req, res) => {
     const book = req.body;
     const payload = jwt.decode(req.cookies.usertoken, clave);
     book.autorId = payload._id;
+    book.estado = 'CREADO';
     Book.create(book)
     .then(data => res.json( { data: data, message: null, error: false}))
     .catch(error => res.json( { data: null, message: error, error: true}))
@@ -33,6 +34,7 @@ module.exports.crear = (req, res) => {
 
 module.exports.actualizar = (req, res) => {
     const book = req.body;
+    book.estado = 'ACTUALIZADO';
     Book.findByIdAndUpdate(req.params.id, book)
     .then(data => res.json( { data: book, message: null, error: false}))
     .catch(error => res.json( { data: null, message: error, error: true}))
