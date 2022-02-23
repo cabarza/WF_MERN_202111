@@ -4,10 +4,12 @@ import SocketContext from "../../context/socket-context";
 import BookAdmin from "../books/admin";
 import ViewOne from "../views-example/view-one";
 import ViewTwo from "../views-example/view-two";
+import { useCookies } from 'react-cookie';
 
 const Home = () => {
 
     const {login, setLogin, usuario} = useContext(SocketContext);
+    const [cookies, setCookie, removeCookie] = useCookies(['usertoken']);
 
     const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const Home = () => {
                     <Link to={`/view2/${estado}`}>Vista 2</Link> &nbsp;
                     <Link to="/books">Libros</Link> &nbsp;
                     <a className="active" style={{cursor:'pointer'}} onClick={e => {
+                        removeCookie("usertoken");
                         sessionStorage.removeItem('USUARIO');
                         setLogin(false);
                         navigate('/')
